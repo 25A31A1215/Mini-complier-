@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+// Function to evaluate simple expressions (only +, -, *, /)
+int evaluate(int a, int b, char op) {
+    switch(op) {
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
+        case '/': return b != 0 ? a / b : 0;
+        default: return 0;
+    }
+}
+
+int main() {
+    string input;
+    cout << "Enter expression (e.g., 3+5): ";
+    cin >> input;
+
+    int num1 = 0, num2 = 0;
+    char op;
+
+    int i = 0;
+
+    // Extract first number
+    while (isdigit(input[i])) {
+        num1 = num1 * 10 + (input[i] - '0');
+        i++;
+    }
+
+    // Operator
+    op = input[i++];
+
+    // Extract second number
+    while (i < input.length() && isdigit(input[i])) {
+        num2 = num2 * 10 + (input[i] - '0');
+        i++;
+    }
+
+    int result = evaluate(num1, num2, op);
+
+    cout << "Result: " << result << endl;
+
+    return 0;
+}
